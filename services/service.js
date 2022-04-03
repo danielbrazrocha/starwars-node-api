@@ -18,7 +18,7 @@ module.exports = {
 
     //A GET Route to get one planet by ID
     getPlanetsData: function (request, response) {
-        axios.get(urlBase + `${'/planets/' + request.params.idChar}`)
+        axios.get(urlBase + `${'/planets/' + request.params.idPlanet}`)
             .then(resp => {
                 response.json(
                     resp.data
