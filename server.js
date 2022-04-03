@@ -14,7 +14,7 @@ function initializeServer () {
     router(server); //Adicionando as chamadas de rotas no servidor NODE
 
     server.listen(41200, function () {
-        console.log("CI&T-2022");
+        console.log("CI&T-2022 - Starwars consumer API is running on port 41200");
     });
 
 }

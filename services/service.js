@@ -16,7 +16,33 @@ module.exports = {
             });
     },
 
-    getPlanetsData: function (request, response) { },
+    //A GET Route to get one planet by ID
+    getPlanetsData: function (request, response) {
+        axios.get(urlBase + `${'/planets/' + request.params.idChar}`)
+            .then(resp => {
+                response.json(
+                    resp.data
+
+                );
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
+
+    //A GET Route to get all the planets
+    getAllPlanetsData: function (request, response) {
+        axios.get(urlBase + `${'/planets/'}`)
+            .then(resp => {
+                response.json(
+                    resp.data
+
+                );
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
 
     getStarShipData: function (request, response) { },
 
