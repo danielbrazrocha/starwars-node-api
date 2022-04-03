@@ -18,15 +18,29 @@ module.exports = {
 
     //A GET Route to get one planet by ID
     getPlanetsData: function (request, response) {
-        axios.get(urlBase + `${'/planets/' + request.params.idChar}`)
+        //verify if the id is valid number
+        if (isNaN(request.params.idPlanet)) {
+            response.status(400).json({
+                message: 'Invalid Planet ID'
+            });
+            return;
+        }
+                
+
+
+        axios.get(urlBase + `${'/planets/' + request.params.idPlanet}`)
             .then(resp => {
-                response.json(
+                response.status(200).json(
                     resp.data
 
                 );
             })
             .catch(error => {
-                console.log(error);
+                //send 404 if not found with a custom message
+                response.status(404).json({
+                    message: 'Planet not found'
+                });
+                //console.log(error);
             });
     },
 
