@@ -44,18 +44,41 @@ module.exports = {
             });
     },
 
-    //A GET Route to get all the planets
-    getAllPlanetsData: function (request, response) {
-        axios.get(urlBase + `${'/planets/'}`)
-            .then(resp => {
-                response.json(
-                    resp.data
 
+    //A GET Route to get all the planets with a recursive call
+    getAllPlanetsData: function (request, response) {
+
+        let allPlanetsData = [];
+
+        allPlanetsRecursiveData = function (page) {
+            axios.get(urlBase + `${'/planets/?page=' + page}`)
+                .then(resp => {
+                    console.log("Verificando pagina: " + page);
+                    allPlanetsData = allPlanetsData.concat(resp.data.results);
+                    //console.log(allPlanetsData);
+                    if (resp.data.next) {
+                        allPlanetsRecursiveData(page + 1);
+                    } else {
+                        response.status(200).json(
+                            allPlanetsData
+                        );
+                    }
+                })
+                .catch(error => {
+                    //send 500 error with a custom message
+                    response.status(500).json({
+                        message: 'Erro ao recuperar dados dos planetas'
+                    });
+                    //console.log(error);
+                }
                 );
-            })
-            .catch(error => {
-                console.log(error);
-            });
+
+                
+        }
+
+        //calling the recursive function with a initial page 1
+        allPlanetsRecursiveData(1);
+
     },
 
     getStarShipData: function (request, response) { },
