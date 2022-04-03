@@ -1,0 +1,132 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "A Node API using Starwars API",
+      "description": "Project to get Planet data from Starwars API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:41200",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Starwars API Endpoints",
+        "description": "API para acesso aos dados de Starwars, módulo Planetas"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    
+    "paths": {
+        "/getPlanetsData": {
+        "get": {
+            "tags": ["AllPlanetsData"],
+            "summary": "Get all planets in a API",
+            "responses": {
+            "200": {
+                "description": "OK"
+            },
+            "500": {
+                "description": "Error in the server"
+            }
+            }
+        }
+        },
+
+
+
+        "/getPlanetsData/{id}": {
+        "get": {
+            "tags": ["PlanetsData"],
+            "summary": "Get a planet by id",
+            "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "description": "Planet id",
+                "required": true,
+                "type": "string"
+            }
+            ],
+            "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                    "$ref": "#/definitions/Planet"
+                  }
+            },
+            "400": {
+                "description": "Planet Id is not valid"
+            },
+            "404": {
+                "description": "Planet not found"
+            }
+            }
+        }
+        }
+
+    },
+    "definitions": {
+        "Planet": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "rotation_period": {
+                    "type": "string"
+                },
+                "orbital_period": {
+                    "type": "string"
+                },
+                "diameter": {
+                    "type": "string"
+                },
+                "climate": {
+                    "type": "string"
+                },
+                "gravity": {
+                    "type": "string"
+                },
+                "terrain": {
+                    "type": "string"
+                },
+                "surface_water": {
+                    "type": "string"
+                },                
+                "population": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "residents": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "films": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "created": {
+                    "type": "string"
+                },
+                "edited": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+    
+  }
